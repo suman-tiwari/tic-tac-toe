@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+  <head>
+    <title>Tic tac toe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- <link href="style.css" rel="stylesheet" > -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      .cell{
+        background-color: lightblue;
+        border: 1px solid black;
+        width: 150px;
+        display: inline-block;
+        height: 150px;
+        overflow: hidden;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+      }
+      .margin20{
+        margin-top: 20px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <header class='text-center mt-4'>
+      <h1 class="mb-0">Tic Tac Toe</h1>
+      <h3 class="mt-0">Lets play the game!!!</h3>
+    </header>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-3 cell"></div>
+      <div class="col-md-3 cell"></div>
+      <div class="col-md-3 cell"></div>
+    </div>
+    </header>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-3 cell"></div>
+      <div class="col-md-3 cell"></div>
+      <div class="col-md-3 cell"></div>
+    </div>
+    </header>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-3 cell"></div>
+      <div class="col-md-3 cell"></div>
+      <div class="col-md-3 cell"></div>
+    </div>
+    
+  </body>
+  <!-- <script src="script.js"></script> -->
+  <!-- jquery code  -->
+  <script>
+    let cells = document.querySelectorAll('.cell')
+    $(cells).each(function(index, box){
+      $(box).one('click', function(){
+        debugger
+        this.innerHTML = "clicked"
+      })
+    })
+  </script>
+</html>
