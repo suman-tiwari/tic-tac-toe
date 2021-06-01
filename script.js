@@ -2,7 +2,7 @@ let cells = document.querySelectorAll('.cell')
     var player="O";
     var clickCount = 0;
     var winner;
-    currentPlayer()
+    currentPlayer();
     choosePlayer();
     // reset game by reloading page
     $('.reset').on('click', function(){
@@ -12,7 +12,7 @@ let cells = document.querySelectorAll('.cell')
       $(box).one('click', function(){
         $('#choose-player').addClass('d-none')
         this.innerHTML = player;
-        cell = this
+        cell = this;
         
         clickCount += 1;
         setPlayer();
@@ -20,18 +20,18 @@ let cells = document.querySelectorAll('.cell')
         // if number of clicks is 5 or more then only check the winner
         setTimeout(function(){
           if(clickCount>=5){
-            checkRow(cell.id)
-            checkColumn(cell.id)
-            checkDiagonal(cell.id)
+            checkRow(cell.id);
+            checkColumn(cell.id);
+            checkDiagonal(cell.id);
   
           }
   
           if(winner == undefined && clickCount==9){
             if(confirm("Game is tie.")){
-              window.location.reload()
+              window.location.reload();
             }
           }
-        },1)
+        },100)
         
       })
     })
