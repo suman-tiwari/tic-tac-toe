@@ -10,6 +10,7 @@ let cells = document.querySelectorAll('.cell')
     })
     $(cells).each(function(index, box){
       $(box).one('click', function(){
+        $('#choose-player').addClass('d-none')
         this.innerHTML = player;
         cell = this
         
@@ -18,7 +19,6 @@ let cells = document.querySelectorAll('.cell')
 
         // if number of clicks is 5 or more then only check the winner
         setTimeout(function(){
-          debugger
           if(clickCount>=5){
             checkRow(cell.id)
             checkColumn(cell.id)
@@ -27,7 +27,7 @@ let cells = document.querySelectorAll('.cell')
           }
   
           if(winner == undefined && clickCount==9){
-            if(confirm("Game is tied.")){
+            if(confirm("Game is tie.")){
               window.location.reload()
             }
           }
