@@ -1,6 +1,7 @@
 let cells = document.querySelectorAll('.cell')
     var player="O";
     var clickCount = 0;
+    var winner;
     currentPlayer()
     choosePlayer();
     // reset game by reloading page
@@ -9,21 +10,34 @@ let cells = document.querySelectorAll('.cell')
     })
     $(cells).each(function(index, box){
       $(box).one('click', function(){
+        this.innerHTML = player;
+        cell = this
+        
         clickCount += 1;
-        setPlayer(this);
+        setPlayer();
 
-        // if number of clicks is 3 or more then check the numb
-        if(clickCount>=5){
-          checkRow(this.id)
-          checkColumn(this.id)
-          checkDiagonal(this.id)
-        }
+        // if number of clicks is 5 or more then only check the winner
+        setTimeout(function(){
+          debugger
+          if(clickCount>=5){
+            checkRow(cell.id)
+            checkColumn(cell.id)
+            checkDiagonal(cell.id)
+  
+          }
+  
+          if(winner == undefined && clickCount==9){
+            if(confirm("Game is tied.")){
+              window.location.reload()
+            }
+          }
+        },1)
+        
       })
     })
 
     // function to set players and display player text
-    function setPlayer(elem){
-      elem.innerHTML = player;
+    function setPlayer(){
       if(player=='O'){
         player='X'
       }else{
@@ -54,9 +68,11 @@ let cells = document.querySelectorAll('.cell')
 
     // check winner
     function checkWinner(a,b,c){
-      debugger
       if (a[0].innerText==b[0].innerText && b[0].innerText==c[0].innerText && a[0].innerText!=''){
-        alert("Winner is: " + a[0].innerText)
+        winner = a[0].innerText
+        if(confirm("Winner is: " + a[0].innerText)){
+          window.location.reload()
+        }
       }
     }
 
