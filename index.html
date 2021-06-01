@@ -15,6 +15,7 @@
         justify-content: center;
         display: flex;
         align-items: center;
+        font-size: 50px;
       }
       .margin20{
         margin-top: 20px;
@@ -23,60 +24,39 @@
     </style>
   </head>
   <body class="overflow-hidden">
-    <header class='text-center mt-4'>
+    <header class='text-center mt-2'>
       <h1 class="mb-0">Tic Tac Toe</h1>
-      <h3 class="mt-0">Lets play the game!!!</h3>
+<!--      <h3 class="mt-0">Lets play the game!!!</h3>-->
+      <div id="winner">
+        <span>Current Player: ( </span>
+        <span id="current-player"> </span>
+      </div>
     </header>
-    <section>
+    
+    <div class="text-center" id="choose-player">
+      <span>Choose a Player: </span>
+      <button class="xplayer btn btn-sm btn-success px-3">X</button>
+      <button class="oplayer btn btn-sm btn-primary px-3">O</button>
+    </div>
+    <section class="mt-1">
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 cell"></div>
-        <div class="col-md-3 cell"></div>
-        <div class="col-md-3 cell"></div>
+        <div class="col-md-3 cell" id="11"></div>
+        <div class="col-md-3 cell" id="12"></div>
+        <div class="col-md-3 cell" id="13"></div>
       </div>
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 cell"></div>
-        <div class="col-md-3 cell"></div>
-        <div class="col-md-3 cell"></div>
+        <div class="col-md-3 cell" id="21"></div>
+        <div class="col-md-3 cell" id="22"></div>
+        <div class="col-md-3 cell" id="23"></div>
       </div>
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 cell"></div>
-        <div class="col-md-3 cell"></div>
-        <div class="col-md-3 cell"></div>
+        <div class="col-md-3 cell" id="31"></div>
+        <div class="col-md-3 cell" id="32"></div>
+        <div class="col-md-3 cell" id="33"></div>
       </div>
       <button class="reset mt-2 btn btn-danger col-2 offset-5">Reset</button>
     </section>
 
   </body>
-  <!-- <script src="script.js"></script> -->
-  <!-- jquery code  -->
-  <script>
-    let cells = document.querySelectorAll('.cell')
-    var player="O";
-    var clickCount = 0;
-    // reset game by reloading page
-    $('.reset').on('click', function(){
-      window.location.reload()
-    })
-    $(cells).each(function(index, box){
-      $(box).one('click', function(){
-        clickCount +=1;
-        setPlayer(this);
-
-        // if number of clicks is 3 or more then check the numb
-        if(clickCount==3){
-          alert("clicked 3 times now")
-        }
-      })
-    })
-
-    // function to set players and display player text
-    function setPlayer(elem){
-      elem.innerHTML = player;
-      if(player=='O'){
-        player='X'
-      }else{
-        player = 'O'
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </html>
