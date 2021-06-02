@@ -1,13 +1,13 @@
-let cells = document.querySelectorAll('.cell')
+let cells = document.querySelectorAll('.cell');
     var player="O";
     var clickCount = 0;
     var winner;
     currentPlayer();
     choosePlayer();
     // reset game by reloading page
-    $('.reset').on('click', function(){
-      window.location.reload()
-    })
+    // $('.reset').on('click', function(){
+    //   window.location.reload()
+    // });
     $(cells).each(function(index, box){
       $(box).one('click', function(){
         $('#choose-player').addClass('d-none')
@@ -23,13 +23,10 @@ let cells = document.querySelectorAll('.cell')
             checkRow(cell.id);
             checkColumn(cell.id);
             checkDiagonal(cell.id);
-  
           }
   
           if(winner == undefined && clickCount==9){
-            if(confirm("Game is tie.")){
-              window.location.reload();
-            }
+              displayAlert("Game is tie.");
           }
         },100)
         
@@ -69,13 +66,16 @@ let cells = document.querySelectorAll('.cell')
     // check winner
     function checkWinner(a,b,c){
       if (a[0].innerText==b[0].innerText && b[0].innerText==c[0].innerText && a[0].innerText!=''){
-        winner = a[0].innerText
-        if(confirm("Winner is: " + a[0].innerText)){
-          window.location.reload()
-        }
+        winner = a[0].innerText;
+        displayAlert("Winner is: " + winner);
       }
     }
 
+    // display alert message and load page
+    function displayAlert(msg){
+        alert(msg);
+        window.location.reload();
+    }
     // print winner and stop
     function printWinner(elemId){
       $('#winner').children().remove();
@@ -84,15 +84,15 @@ let cells = document.querySelectorAll('.cell')
 
     // check row
     function checkRow(id){
-      let i = id.split('')[0]
+      let i = id.split('')[0];
       if (checkWinner($('#'+i+'1'), $('#'+i+'2'), $('#'+i+'3'))){
-        printWinner(id)
+        printWinner(id);
       }
     }
 
     // check column
     function checkColumn(id){
-      let i = id.split('')[1]
+      let i = id.split('')[1];
       if (checkWinner($('#'+'1'+ i), $('#'+'2'+i), $('#'+'3'+i))){
         printWinner(id)
       }
