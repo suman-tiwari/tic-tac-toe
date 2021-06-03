@@ -1,18 +1,15 @@
-let cells = document.querySelectorAll('.cell');
+var cells = document.querySelectorAll('.cell');
 var player = "O";
 var clickCount = 0;
 var winner;
-currentPlayer();
-choosePlayer();
-// reset game by reloading page
-// $('.reset').on('click', function(){
-//   window.location.reload()
-// });
+displayCurrentPlayer();
+selectPlayer();
+
 $(cells).each(function (index, box) {
     $(box).one('click', function () {
         $('#choose-player').addClass('d-none');
-        // this.setAttribute('data-value', player);
         cell = this;
+        this.innerText = player;
 
         clickCount += 1;
         setPlayer();
@@ -20,9 +17,6 @@ $(cells).each(function (index, box) {
         // if number of clicks is 5 or more then only check the winner
         setTimeout(function () {
             if (clickCount >= 5) {
-                // checkRow(cell.id);
-                // checkColumn(cell.id);
-                // checkDiagonal(cell.id);
                 checkRow(getBoxDataValue(cell));
                 checkColumn(getBoxDataValue(cell));
                 checkDiagonal(getBoxDataValue(cell));
@@ -33,7 +27,6 @@ $(cells).each(function (index, box) {
             }
         }, 100);
 
-        this.innerText = player;
 
     });
 });
@@ -51,25 +44,20 @@ function setPlayer() {
         player = 'O';
     }
     // display current player
-    currentPlayer();
+    displayCurrentPlayer();
 }
 
-// to chose player
-function choosePlayer() {
+// select a player
+function selectPlayer() {
     $('.xplayer').one('click', function () {
         player = 'X';
         $('#choose-player').addClass('d-none');
-        currentPlayer();
-    });
-    $('.oplayer').one('click', function () {
-        player = 'O';
-        $('#choose-player').addClass('d-none');
-        currentPlayer();
+        displayCurrentPlayer();
     });
 }
 
 // append current player
-function currentPlayer() {
+function displayCurrentPlayer() {
     $('#current-player')[0].innerText = player + " )";
 }
 
