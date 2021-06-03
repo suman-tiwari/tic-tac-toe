@@ -11,8 +11,7 @@ choosePlayer();
 $(cells).each(function (index, box) {
     $(box).one('click', function () {
         $('#choose-player').addClass('d-none');
-        this.innerText = player;
-        this.setAttribute('data-value', player);
+        // this.setAttribute('data-value', player);
         cell = this;
 
         clickCount += 1;
@@ -21,15 +20,20 @@ $(cells).each(function (index, box) {
         // if number of clicks is 5 or more then only check the winner
         setTimeout(function () {
             if (clickCount >= 5) {
-                checkRow(cell.id);
-                checkColumn(cell.id);
-                checkDiagonal(cell.id);
+                // checkRow(cell.id);
+                // checkColumn(cell.id);
+                // checkDiagonal(cell.id);
+                checkRow(getBoxDataValue(cell));
+                checkColumn(getBoxDataValue(cell));
+                checkDiagonal(getBoxDataValue(cell));
             }
 
             if (winner == undefined && clickCount == 9) {
                 displayAlert("Game is tie.");
             }
         }, 100);
+
+        this.innerText = player;
 
     });
 });
@@ -79,43 +83,34 @@ function checkWinner(a, b, c) {
 
 // display alert message and load page
 function displayAlert(msg) {
+
     alert(msg);
     window.location.reload();
 }
 
-// print winner and stop
-function printWinner(elemId) {
-    $('#winner').children().remove();
-    $('#winner').append("Winner is: " + $(elemId).innerText);
+// get rowise box value
+function getBoxValue(dataVal){
+    return $('[data-value="'+dataVal+'"]').text()
 }
-
 // check row
-function checkRow(id) {
-    let i = id.split('')[0];
-    if (checkWinner(getBoxDataValue('#' + i + '1'), getBoxDataValue('#' + i + '2'), getBoxDataValue('#' + i + '3'))) {
-        printWinner(id);
-    }
+function checkRow(dataValue) {
+    let i = dataValue.split('')[0];
+    checkWinner(getBoxValue(i+'1'), getBoxValue(i+'2'), getBoxValue(i+'3'))
 }
 
 // check column
-function checkColumn(id) {
-    let i = id.split('')[1];
-    if (checkWinner(getBoxDataValue('#' + '1' + i), getBoxDataValue('#' + '2' + i), getBoxDataValue('#' + '3' + i))) {
-        printWinner(id);
-    }
+function checkColumn(dataValue) {
+    let i = dataValue.split('')[1];
+    checkWinner(getBoxValue('1'+i), getBoxValue('2'+i), getBoxValue('3'+i))
 }
 
 // check diagonal
-function checkDiagonal(id) {
-    let i = id.split('')[0];
-    let j = id.split('')[1];
+function checkDiagonal(dataValue) {
+    let i = dataValue.split('')[0];
+    let j = dataValue.split('')[1];
     if (i === j) {
-        if (checkWinner(getBoxDataValue('#11'), getBoxDataValue('#22'), getBoxDataValue('#33'))) {
-            printWinner(id);
-        }
+        checkWinner(getBoxValue('11'), getBoxValue('22'), getBoxValue('33'))
     } else {
-        if (checkWinner($('#13'), $('#22'), $('#31'))) {
-            printWinner(id);
-        }
+        checkWinner(getBoxValue('13'), getBoxValue('22'), getBoxValue('31'))
     }
 }
