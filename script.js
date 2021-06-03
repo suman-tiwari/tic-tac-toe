@@ -10,8 +10,9 @@ choosePlayer();
 // });
 $(cells).each(function (index, box) {
     $(box).one('click', function () {
-        $('#choose-player').addClass('d-none')
-        this.innerHTML = player;
+        $('#choose-player').addClass('d-none');
+        this.innerText = player;
+        this.setAttribute('data-value', player);
         cell = this;
 
         clickCount += 1;
@@ -28,45 +29,50 @@ $(cells).each(function (index, box) {
             if (winner == undefined && clickCount == 9) {
                 displayAlert("Game is tie.");
             }
-        }, 100)
+        }, 100);
 
-    })
-})
+    });
+});
+
+// get data position value of an element
+function getBoxDataValue(elem){
+    return $(elem)[0].getAttribute('data-value')
+}
 
 // function to set players and display player text
 function setPlayer() {
-    if (player == 'O') {
-        player = 'X'
+    if (player==='O') {
+        player = 'X';
     } else {
-        player = 'O'
+        player = 'O';
     }
     // display current player
-    currentPlayer()
+    currentPlayer();
 }
 
 // to chose player
 function choosePlayer() {
     $('.xplayer').one('click', function () {
         player = 'X';
-        $('#choose-player').addClass('d-none')
-        currentPlayer()
-    })
+        $('#choose-player').addClass('d-none');
+        currentPlayer();
+    });
     $('.oplayer').one('click', function () {
         player = 'O';
-        $('#choose-player').addClass('d-none')
-        currentPlayer()
-    })
+        $('#choose-player').addClass('d-none');
+        currentPlayer();
+    });
 }
 
 // append current player
 function currentPlayer() {
-    $('#current-player')[0].innerText = player + " )"
+    $('#current-player')[0].innerText = player + " )";
 }
 
 // check winner
 function checkWinner(a, b, c) {
-    if (a[0].innerText == b[0].innerText && b[0].innerText == c[0].innerText && a[0].innerText != '') {
-        winner = a[0].innerText;
+    if (a === b && b===c && a != null) {
+        winner = a;
         displayAlert("Winner is: " + winner);
     }
 }
@@ -80,13 +86,13 @@ function displayAlert(msg) {
 // print winner and stop
 function printWinner(elemId) {
     $('#winner').children().remove();
-    $('#winner').append("Winner is: " + $(elemId).innerText)
+    $('#winner').append("Winner is: " + $(elemId).innerText);
 }
 
 // check row
 function checkRow(id) {
     let i = id.split('')[0];
-    if (checkWinner($('#' + i + '1'), $('#' + i + '2'), $('#' + i + '3'))) {
+    if (checkWinner(getBoxDataValue('#' + i + '1'), getBoxDataValue('#' + i + '2'), getBoxDataValue('#' + i + '3'))) {
         printWinner(id);
     }
 }
@@ -94,8 +100,8 @@ function checkRow(id) {
 // check column
 function checkColumn(id) {
     let i = id.split('')[1];
-    if (checkWinner($('#' + '1' + i), $('#' + '2' + i), $('#' + '3' + i))) {
-        printWinner(id)
+    if (checkWinner(getBoxDataValue('#' + '1' + i), getBoxDataValue('#' + '2' + i), getBoxDataValue('#' + '3' + i))) {
+        printWinner(id);
     }
 }
 
@@ -103,13 +109,13 @@ function checkColumn(id) {
 function checkDiagonal(id) {
     let i = id.split('')[0];
     let j = id.split('')[1];
-    if (i == j) {
-        if (checkWinner($('#11'), $('#22'), $('#33'))) {
-            printWinner(id)
+    if (i === j) {
+        if (checkWinner(getBoxDataValue('#11'), getBoxDataValue('#22'), getBoxDataValue('#33'))) {
+            printWinner(id);
         }
     } else {
         if (checkWinner($('#13'), $('#22'), $('#31'))) {
-            printWinner(id)
+            printWinner(id);
         }
     }
 }
