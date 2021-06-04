@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <head>
     <title>Tic tac toe</title>
+    <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
      <link href="style.css" rel="stylesheet" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -17,25 +18,24 @@
     </header>
     
     <div class="text-center" id="choose-player">
-      <span>Choose a Player: </span>
+      <span>Select Player: </span>
       <button class="xplayer btn btn-sm btn-success px-3">X</button>
-      <button class="oplayer btn btn-sm btn-primary px-3">O</button>
     </div>
     <section class="mt-1">
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 cell" id="11"></div>
-        <div class="col-md-3 cell" id="12"></div>
-        <div class="col-md-3 cell" id="13"></div>
+        <div class="col-md-3 cell" data-value="11" ></div>
+        <div class="col-md-3 cell" data-value="12" ></div>
+        <div class="col-md-3 cell" data-value="13" ></div>
       </div>
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 cell" id="21"></div>
-        <div class="col-md-3 cell" id="22"></div>
-        <div class="col-md-3 cell" id="23"></div>
+        <div class="col-md-3 cell" data-value="21" ></div>
+        <div class="col-md-3 cell" data-value="22" ></div>
+        <div class="col-md-3 cell" data-value="23" ></div>
       </div>
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 cell" id="31"></div>
-        <div class="col-md-3 cell" id="32"></div>
-        <div class="col-md-3 cell" id="33"></div>
+        <div class="col-md-3 cell" data-value="31" ></div>
+        <div class="col-md-3 cell" data-value="32" ></div>
+        <div class="col-md-3 cell" data-value="33" ></div>
       </div>
       <!-- <button class="reset mt-2 btn btn-danger col-2 offset-5">Reset</button> -->
     </section>
